@@ -1,0 +1,6 @@
+{
+  "name": "1-Year Investor Update",
+  "description": "An immersive, trackable 1-year progress and transparency report for Turan's uncle detailing growth, elite skill acquisition, financial ledger, and academic development on a high-end laptop.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
