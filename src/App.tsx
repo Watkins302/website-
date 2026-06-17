@@ -89,6 +89,16 @@ export default function App() {
     ]
   };
 
+  // Prevent browser scroll restoration on reload and force scroll to top
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   // Scroll Progress and Active Section Tracker (IntersectionObserver)
   useEffect(() => {
     const handleScroll = () => {
