@@ -54,6 +54,11 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState<string>("hero");
 
+  // Custom Bottom-to-Top scroll animation & page loader states
+  const [isLoaderShowing, setIsLoaderShowing] = useState(true);
+  const [loaderFadeOut, setLoaderFadeOut] = useState(false);
+  const mainContentRef = useRef<HTMLDivElement>(null);
+
   // Active terminal commands text logs based on real hard skills and focus
   const terminalLogs = {
     agent: [
@@ -89,13 +94,78 @@ export default function App() {
     ]
   };
 
-  // Prevent browser scroll restoration on reload and force scroll to top
+  // Prevent browser scroll restoration on reload and force custom scroll transition
   useEffect(() => {
     if (typeof window !== "undefined") {
       if ("scrollRestoration" in window.history) {
         window.history.scrollRestoration = "manual";
       }
-      window.scrollTo(0, 0);
+
+      // Hide overflow to lock window during scroll intro
+      document.body.style.overflowY = "hidden";
+
+      // Slight timeout to let DOM render completely
+      const initTimer = setTimeout(() => {
+        const documentHeight = document.documentElement.scrollHeight;
+        const windowHeight = window.innerHeight;
+        const maxScroll = Math.max(0, documentHeight - windowHeight);
+
+        // Instant jump to bottom
+        window.scrollTo(0, maxScroll);
+
+        const animationTimer = setTimeout(() => {
+          setLoaderFadeOut(true);
+
+          const duration = 1500; // 1.5 seconds smooth transition
+          const startScroll = maxScroll;
+          const startTime = performance.now();
+          const targetElt = mainContentRef.current;
+
+          function animateScroll(currentTime: number) {
+            const elapsed = currentTime - startTime;
+            let progress = elapsed / duration;
+            if (progress > 1) progress = 1;
+
+            // Quartic ease out curve
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const currentScroll = startScroll * (1 - easeOutQuart);
+            window.scrollTo(0, currentScroll);
+
+            // Dynamic motion blur and vertical stretch based on speed
+            const speed = (1 - progress) * 15; // Max 15px motion blur
+            if (targetElt) {
+              const blurAmount = Math.max(0, progress === 1 ? 0 : speed);
+              targetElt.style.filter = `blur(${blurAmount}px)`;
+              targetElt.style.transform = `translateY(${progress === 1 ? 0 : (speed * 1.5)}px)`;
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(animateScroll);
+            } else {
+              // Done scrolling
+              window.scrollTo(0, 0);
+              setIsLoaderShowing(false);
+              document.body.style.overflowY = "auto";
+              if (targetElt) {
+                targetElt.style.filter = "none";
+                targetElt.style.transform = "none";
+              }
+              // Activate the hero section animations
+              const hero = document.getElementById("hero");
+              if (hero) hero.classList.add("active");
+            }
+          }
+
+          requestAnimationFrame(animateScroll);
+        }, 600);
+
+        return () => clearTimeout(animationTimer);
+      }, 100);
+
+      return () => {
+        clearTimeout(initTimer);
+        document.body.style.overflowY = "auto";
+      };
     }
   }, []);
 
@@ -295,6 +365,24 @@ export default function App() {
   return (
     <div id="landing-container" className="min-h-screen bg-brand-bg text-brand-text-dim font-sans antialiased relative">
       
+      {/* Initial Page Loader Screen */}
+      {isLoaderShowing && (
+        <div 
+          id="page-loader" 
+          className={`fixed inset-0 z-[100] bg-brand-bg flex flex-col items-center justify-center pointer-events-auto transition-all duration-[800ms] ${
+            loaderFadeOut ? "opacity-0 invisible" : "opacity-100 visible"
+          }`}
+        >
+          <div className="relative w-16 h-16 mb-4">
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-cyan-400 to-[#8b5cf6] animate-spin blur-[2px] opacity-70"></div>
+            <div className="absolute inset-1 rounded-lg bg-brand-bg flex items-center justify-center text-white font-bold font-mono text-sm tracking-widest z-10 shadow-inner">
+              <span className="animate-pulse">TM</span>
+            </div>
+          </div>
+          <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 animate-pulse">Initializing Timeline...</p>
+        </div>
+      )}
+
       {/* Scroll indicator bar */}
       <div 
         id="ux-scroll-bar" 
@@ -302,13 +390,14 @@ export default function App() {
         style={{ width: `${scrollProgress}%` }}
       />
 
-      {/* Grid Pattern Mesh in absolute background */}
-      <div className="absolute inset-0 bg-[radial-gradient(#26262a_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
+      <div id="main-content" ref={mainContentRef} className="transition-all duration-75 origin-top">
+        {/* Grid Pattern Mesh in absolute background */}
+        <div className="absolute inset-0 bg-[radial-gradient(#26262a_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
 
-      {/* Global Sophisticated Dark Ambient Flares */}
-      <div className="absolute top-[10%] left-[10%] w-[350px] h-[350px] rounded-full bg-brand-accent/5 blur-[120px] pointer-events-none" />
-      <div className="absolute top-[45%] right-[5%] w-[450px] h-[450px] rounded-full bg-brand-accent/5 blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[20%] w-[400px] h-[400px] rounded-full bg-brand-accent/5 blur-[130px] pointer-events-none" />
+        {/* Global Sophisticated Dark Ambient Flares */}
+        <div className="absolute top-[10%] left-[10%] w-[350px] h-[350px] rounded-full bg-brand-accent/5 blur-[120px] pointer-events-none" />
+        <div className="absolute top-[45%] right-[5%] w-[450px] h-[450px] rounded-full bg-brand-accent/5 blur-[150px] pointer-events-none" />
+        <div className="absolute bottom-[10%] left-[20%] w-[400px] h-[400px] rounded-full bg-brand-accent/5 blur-[130px] pointer-events-none" />
 
       {/* Floating Header Panel */}
       <header className="sticky top-4 mx-auto max-w-7xl px-4 z-40 transition-all duration-300">
@@ -706,8 +795,8 @@ export default function App() {
                   <ShieldAlert className="w-4 h-4 text-brand-accent" />
                   Tuition Wisdom Realized
                 </h4>
-                <p className="text-xs text-brand-text-dim leading-relaxed font-sans italic">
-                  "Most children lose money playing games. My losses weren't paid on luxury toys—they were paid inside absolute market combat. I learned hard-token verification, contract boundaries, and developed a complete security standard against bad actors. A cheap price to pay at 17 for absolute digital security for the next 70 years."
+                <p className="text-xs text-brand-text-bright/90 leading-relaxed font-sans italic">
+                  "Most children lose money playing games. My losses weren't paid on luxury toys—they were paid inside absolute market combat. I learned hard-token verification, contract boundaries, and developed a complete security standard against bad actors. A cheap price to pay at 16 for absolute digital security for the next 70 years."
                 </p>
               </div>
             </div>
@@ -1147,6 +1236,7 @@ export default function App() {
           <span className="text-brand-text-dim/70">COMPILED VIA INTELLECT ENGINE</span>
         </div>
       </footer>
+      </div>
     </div>
   );
 }
