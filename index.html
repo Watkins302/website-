@@ -3,10 +3,894 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1-Year Investor & Transparency Report | Turan Mammadli</title>
+    <title>1-Year Progress & Transparency Report | Turan Mammadli</title>
+    
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                bg: '#050508',
+                card: '#0a0b12',
+                cardBorder: 'rgba(255, 255, 255, 0.04)',
+                accent: '#8b5cf6', // Violet
+                accentLight: '#a78bfa',
+                cyan: '#06b6d4',
+                emerald: '#10b981',
+                rose: '#f43f5e',
+                text: {
+                  bright: '#f8fafc',
+                  dim: '#94a3b8',
+                  muted: '#64748b'
+                }
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+              display: ['Space Grotesk', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Custom Core Animations & Layout Aesthetics -->
+    <style>
+      /* Smooth custom scrollbars */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #050508;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(139, 92, 246, 0.2);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(139, 92, 246, 0.4);
+      }
+
+      /* Custom animations & transitions */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px) scale(0.99);
+        transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      /* Glowing background indicators */
+      .glow-cyan {
+        box-shadow: 0 0 24px rgba(6, 182, 212, 0.12);
+      }
+      .glow-purple {
+        box-shadow: 0 0 24px rgba(139, 92, 246, 0.12);
+      }
+      .glow-emerald {
+        box-shadow: 0 0 24px rgba(16, 185, 129, 0.12);
+      }
+
+      /* Loader Spinner styling */
+      @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .animate-spin-slow {
+        animation: spin-slow 8s linear infinite;
+      }
+    </style>
   </head>
-  <body class="bg-[#050505] text-[#94a3b8] font-sans antialiased relative overflow-x-hidden selection:bg-brand-accent selection:text-white">
-    <div id="root"></div>
-    <script type="module" src="./src/main.tsx"></script>
+  <body class="bg-brand-bg text-brand-text-dim font-sans antialiased relative overflow-x-hidden selection:bg-brand-accent selection:text-white">
+
+    <!-- Primary Top Scroll-Progress Tracker -->
+    <div id="ux-scroll-bar" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-brand-cyan via-brand-accent to-brand-emerald z-50 transition-all duration-75" style="width: 0%"></div>
+
+    <!-- INITIAL CINEMATIC PAGE LOADER -->
+    <div id="page-loader" class="fixed inset-0 z-[100] bg-brand-bg flex flex-col items-center justify-center pointer-events-auto transition-all duration-1000">
+      <div class="relative w-20 h-20 mb-6">
+        <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-brand-cyan via-brand-accent to-brand-emerald animate-spin blur-[3px] opacity-60"></div>
+        <div class="absolute inset-1 rounded-xl bg-brand-bg flex flex-col items-center justify-center text-white font-bold font-mono text-sm tracking-widest z-10 shadow-inner">
+          <span class="text-brand-cyan text-xs">TURAN</span>
+          <span class="text-brand-accent text-[9px] mt-0.5">MAMMADLI</span>
+        </div>
+      </div>
+      <p class="text-[11px] font-mono uppercase tracking-[0.25em] text-brand-text-dim animate-pulse">Initializing Investor Dashboard...</p>
+    </div>
+
+    <!-- MAIN MOUNT CONTAINER (With dynamic blur during compile scroll-reveal) -->
+    <div id="main-content" class="transition-all duration-100">
+
+      <!-- Sophisticated Dark Ambient Canvas Flares -->
+      <div class="absolute top-[5%] left-[10%] w-[350px] h-[350px] rounded-full bg-brand-accent/5 blur-[120px] pointer-events-none"></div>
+      <div class="absolute top-[35%] right-[5%] w-[450px] h-[450px] rounded-full bg-brand-cyan/5 blur-[150px] pointer-events-none"></div>
+      <div class="absolute bottom-[20%] left-[15%] w-[400px] h-[400px] rounded-full bg-brand-emerald/5 blur-[130px] pointer-events-none"></div>
+
+      <!-- Floating Glass Navigation Panel -->
+      <header id="navbar" class="sticky top-4 mx-auto max-w-7xl px-4 z-40 transition-all duration-300">
+        <div class="bg-brand-card/85 backdrop-blur-xl border border-brand-cardBorder rounded-2xl px-6 py-4 flex items-center justify-between shadow-lg">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-accent to-brand-cyan flex items-center justify-center font-bold font-mono text-xs text-brand-text-bright shadow-lg">
+              TM
+            </div>
+            <div class="flex flex-col">
+              <span class="text-xs font-bold text-brand-text-bright tracking-wider font-display">Turan Mammadli</span>
+              <span class="text-[9px] font-mono text-brand-cyan uppercase tracking-widest">Transparency Report</span>
+            </div>
+          </div>
+
+          <!-- Nav Anchors -->
+          <nav class="hidden md:flex items-center gap-6">
+            <a href="#hero" class="nav-link text-xs font-medium text-brand-text-dim hover:text-brand-text-bright transition-colors">Executive Overview</a>
+            <a href="#timeline" class="nav-link text-xs font-medium text-brand-text-dim hover:text-brand-text-bright transition-colors">The 12-Month Path</a>
+            <a href="#ledger" class="nav-link text-xs font-medium text-brand-text-dim hover:text-brand-text-bright transition-colors">The Financial Ledger</a>
+            <a href="#academic" class="nav-link text-xs font-medium text-brand-text-dim hover:text-brand-text-bright transition-colors">Academic Corner</a>
+            <a href="#terminal" class="nav-link id-element text-xs font-medium text-brand-text-dim hover:text-brand-text-bright transition-colors">AI Systems Lab</a>
+          </nav>
+
+          <div>
+            <a href="#closing" class="px-3.5 py-1.5 bg-brand-accent/15 border border-brand-accent/35 rounded-xl text-[11px] font-mono font-bold text-brand-accentLight hover:bg-brand-accent/25 transition-all shadow-md">
+              Letter to Investor
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- VIEWPORT PORTFOLIO BODY -->
+      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-32">
+
+        <!-- SECTION 1: THE EXECUTIVE OVERVIEW / HERO -->
+        <section id="hero" class="reveal pt-8 md:pt-16 pb-8 text-center space-y-8 relative">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/95 border border-slate-800 text-[10px] font-mono text-brand-cyan shadow-md glow-cyan">
+            <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+            <span class="uppercase tracking-widest">Transparency Milestone: 365 Days of Work</span>
+          </div>
+
+          <div class="space-y-4 max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-brand-text-bright font-display leading-[1.1]">
+              A 1-Year Progress &amp; <br class="hidden sm:inline" />
+              <span class="bg-gradient-to-r from-brand-accent via-[#a78bfa] to-brand-cyan bg-clip-text text-transparent">Transparency Report</span>
+            </h1>
+            <p class="text-sm sm:text-base text-brand-text-dim max-w-2xl mx-auto leading-relaxed">
+              An objective, data-backed operational account of my 12-month journey navigating technical skills, financial detours, and next-generation AI agents. Crafted intentionally for my Uncle.
+            </p>
+          </div>
+
+          <!-- Quick Fact Matrix Badges -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6">
+            <div class="bg-brand-card border border-brand-cardBorder rounded-2xl p-4 flex flex-col items-center justify-center space-y-1">
+              <span class="text-brand-accent text-[10px] uppercase font-mono tracking-widest">Operational Age</span>
+              <span class="text-xl font-bold font-display text-brand-text-bright">16 Years Old</span>
+            </div>
+            <div class="bg-brand-card border border-brand-cardBorder rounded-2xl p-4 flex flex-col items-center justify-center space-y-1">
+              <span class="text-brand-cyan text-[10px] uppercase font-mono tracking-widest">IELTS Metric</span>
+              <span class="text-xl font-bold font-display text-brand-text-bright">Current: Prepped</span>
+            </div>
+            <div class="bg-brand-card border border-brand-cardBorder rounded-2xl p-4 flex flex-col items-center justify-center space-y-1">
+              <span class="text-brand-emerald text-[10px] uppercase font-mono tracking-widest font-bold">Total Work Return</span>
+              <span class="text-xl font-bold font-display text-brand-text-bright">$350 Realized</span>
+            </div>
+            <div class="bg-brand-card border border-brand-cardBorder rounded-2xl p-4 flex flex-col items-center justify-center space-y-1">
+              <span class="text-yellow-400 text-[10px] uppercase font-mono tracking-widest">Active Focus Area</span>
+              <span class="text-xl font-bold font-display text-brand-text-bright">AI Agents / SAT</span>
+            </div>
+          </div>
+
+          <!-- Key Metrics Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto pt-4 text-left">
+            
+            <div class="bg-gradient-to-b from-[#0e0f19] to-brand-bg border border-brand-cardBorder p-6 rounded-3xl space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center">
+                <i data-lucide="cpu" class="w-5 h-5 text-brand-accent"></i>
+              </div>
+              <h3 class="text-base font-bold font-display text-brand-text-bright">Operational Hardware Engine</h3>
+              <p class="text-xs text-brand-text-dim leading-relaxed">
+                The high-performance custom computer you funded remains my entire development engine. It does not run games; it operates continuous local LLMs, handles heavy 4K timelines, and hosts browser automation scripts.
+              </p>
+            </div>
+
+            <div class="bg-gradient-to-b from-[#09151e] to-brand-bg border border-brand-cardBorder p-6 rounded-3xl space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-brand-cyan/10 border border-brand-cyan/30 flex items-center justify-center">
+                <i data-lucide="award" class="w-5 h-5 text-brand-cyan"></i>
+              </div>
+              <h3 class="text-base font-bold font-display text-brand-text-bright">Absolute Execution Shift</h3>
+              <p class="text-xs text-brand-text-dim leading-relaxed">
+                Faced with massive regional VPN and logistics barriers in Gadzhi monetization pools, I did not stop. I spent 2 months in full apprenticeship—training myself in After Effects, writing system scripts, and mastering cold client acquisition.
+              </p>
+            </div>
+
+            <div class="bg-gradient-to-b from-[#081814] to-brand-bg border border-brand-cardBorder p-6 rounded-3xl space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-brand-emerald/10 border border-brand-emerald/30 flex items-center justify-center">
+                <i data-lucide="trending-up" class="w-5 h-5 text-brand-emerald"></i>
+              </div>
+              <h3 class="text-base font-bold font-display text-brand-text-bright">The Future Trajectory</h3>
+              <p class="text-xs text-brand-text-dim leading-relaxed">
+                Mastering video editing was my gateway skill. I have successfully merged editing mechanics with software production—developing automated AI systems. I am now building robust web pipelines and automating customer cycles.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SECTION 2: THE 12-MONTH CHRONOLOGICAL TIMELINE -->
+        <section id="timeline" class="reveal space-y-16">
+          <div class="space-y-4 text-center max-w-2xl mx-auto">
+            <h2 class="text-3xl font-extrabold tracking-tight text-brand-text-bright font-display">
+              The 12-Month Progression
+            </h2>
+            <p class="text-xs sm:text-sm text-brand-text-dim leading-relaxed">
+              Every stage, every technical barrier, and every operational pivot mapped accurately from Month 1 to the Present.
+            </p>
+          </div>
+
+          <!-- Timeline Track Layout -->
+          <div class="relative max-w-4xl mx-auto pl-6 sm:pl-0">
+            <!-- Central Line for Larger Screens -->
+            <div class="absolute left-0 sm:left-1/2 top-0 bottom-0 w-[1px] bg-slate-800 pointer-events-none"></div>
+
+            <!-- Month 1-2 Card -->
+            <div class="relative flex flex-col sm:flex-row items-center justify-between mb-16">
+              <div class="absolute left-[-24px] sm:left-1/2 sm:ml-[-8px] w-4 h-4 rounded-full bg-brand-accent ring-4 ring-brand-bg shadow-lg flex items-center justify-center"></div>
+              <div class="w-full sm:w-[45%] pr-0 sm:pr-8 text-left sm:text-right">
+                <span class="inline-block px-2.5 py-0.5 bg-brand-accent/10 border border-brand-accent/35 text-brand-accentLight font-mono text-[9px] uppercase tracking-wider rounded-md mb-2">Month 1 - 2</span>
+                <h3 class="text-lg font-bold font-display text-brand-text-bright">The Pitch &amp; The Physical Wall</h3>
+                <p class="text-xs text-brand-text-dim leading-relaxed mt-1">
+                  Launched the "Clipping 2025" thesis with absolute determination (backed by Gadzhi models). However, I hit a massive Technical and Logistical Wall—requiring physical secondary device SIMs, targeting proxies, and constant premium country VPN loops to serve US and European audiences from my region.
+                </p>
+              </div>
+              <div class="hidden sm:block w-[45%]"></div>
+            </div>
+
+            <!-- Month 3-4 Card -->
+            <div class="relative flex flex-col sm:flex-row items-center justify-between mb-16">
+              <div class="absolute left-[-24px] sm:left-1/2 sm:ml-[-8px] w-4 h-4 rounded-full bg-brand-cyan ring-4 ring-brand-bg shadow-lg flex items-center justify-center"></div>
+              <div class="hidden sm:block w-[45%]"></div>
+              <div class="w-full sm:w-[45%] pl-0 sm:pl-8 text-left">
+                <span class="inline-block px-2.5 py-0.5 bg-brand-cyan/10 border border-brand-cyan/35 text-brand-cyan font-mono text-[9px] uppercase tracking-wider rounded-md mb-2">Month 3 - 4</span>
+                <h3 class="text-lg font-bold font-display text-brand-text-bright">The Hard Skill Pivot &amp; Free Labor</h3>
+                <p class="text-xs text-brand-text-dim leading-relaxed mt-1">
+                  Instead of giving up on the machine, I abandoned automated tools like CapCut and spent 2 full months mastering raw technical video design: Adobe Premiere Pro and After Effects. To break into the highly competitive freelancing sphere and learn how to communicate with real clients, I edited fully for FREE for 4 consecutive months.
+                </p>
+              </div>
+            </div>
+
+            <!-- Month 5-8 Card -->
+            <div class="relative flex flex-col sm:flex-row items-center justify-between mb-16">
+              <div class="absolute left-[-24px] sm:left-1/2 sm:ml-[-8px] w-4 h-4 rounded-full bg-brand-emerald ring-4 ring-brand-bg shadow-lg flex items-center justify-center"></div>
+              <div class="w-full sm:w-[45%] pr-0 sm:pr-8 text-left sm:text-right">
+                <span class="inline-block px-2.5 py-0.5 bg-brand-emerald/10 border border-brand-emerald/35 text-brand-emerald font-mono text-[9px] uppercase tracking-wider rounded-md mb-2">Month 5 - 8</span>
+                <h3 class="text-lg font-bold font-display text-brand-text-bright">Commercial Arena &amp; Sales Success</h3>
+                <p class="text-xs text-brand-text-dim leading-relaxed mt-1">
+                  Entered the paid market. Secured my first long-term client (a clipper creator based in Serbia, EU), earning $115 from custom Shorts. Landed a quality-reconstruction contract for a Russian YouTube creator via rigorous cold email pitch ($42), closed a peak high-tier edit for a high-traffic channel at $125, plus several quick-turn contracts.
+                </p>
+              </div>
+              <div class="hidden sm:block w-[45%]"></div>
+            </div>
+
+            <!-- Month 9-10 Card -->
+            <div class="relative flex flex-col sm:flex-row items-center justify-between mb-16">
+              <div class="absolute left-[-24px] sm:left-1/2 sm:ml-[-8px] w-4 h-4 rounded-full bg-brand-rose ring-4 ring-brand-bg shadow-lg flex items-center justify-center"></div>
+              <div class="hidden sm:block w-[45%]"></div>
+              <div class="w-full sm:w-[45%] pl-0 sm:pl-8 text-left">
+                <span class="inline-block px-2.5 py-0.5 bg-brand-rose/10 border border-brand-rose/35 text-brand-rose font-mono text-[9px] uppercase tracking-wider rounded-md mb-2">Month 9 - 10</span>
+                <h3 class="text-lg font-bold font-display text-text-rose color-red text-red-400">Battle Scars &amp; Market Tuition</h3>
+                <p class="text-xs text-brand-text-dim leading-relaxed mt-1">
+                  Experienced real-world digital friction. I was scammed twice by digital bad actors ($60 in unpaid works from a trusted client). Explored manual Solana coin positions (-$60) and lost $225 to a fraudulent, highly-vouched Telegram alpha calls group and their "auto-bot." Frame as business overhead—not defensive complaints.
+                </p>
+              </div>
+            </div>
+
+            <!-- Month 11-present Card -->
+            <div class="relative flex flex-col sm:flex-row items-center justify-between mb-4">
+              <div class="absolute left-[-24px] sm:left-1/2 sm:ml-[-8px] w-4 h-4 rounded-full bg-yellow-400 ring-4 ring-brand-bg shadow-lg flex items-center justify-center"></div>
+              <div class="w-full sm:w-[45%] pr-0 sm:pr-8 text-left sm:text-right">
+                <span class="inline-block px-2.5 py-0.5 bg-yellow-400/10 border border-yellow-400/35 text-yellow-400 font-mono text-[9px] uppercase tracking-wider rounded-md mb-2">Month 11 - 12 (Present)</span>
+                <h3 class="text-lg font-bold font-display text-brand-text-bright">The AI &amp; Web Convergence</h3>
+                <p class="text-xs text-brand-text-dim leading-relaxed mt-1">
+                  Currently scaling from pure graphic editing to programming interactive web components, browser automation agents, and managing complex backend deployments. Combining high-impact visual design with technical automation to secure enterprise contracts.
+                </p>
+              </div>
+              <div class="hidden sm:block w-[45%]"></div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SECTION 3: THE FINANCIAL TRANSPARENCY LEDGER -->
+        <section id="ledger" class="reveal space-y-12">
+          <div class="text-center space-y-4 max-w-2xl mx-auto">
+            <h2 class="text-3xl font-extrabold tracking-tight text-brand-text-bright font-display">
+              The Transparency Ledger
+            </h2>
+            <p class="text-xs sm:text-sm text-brand-text-dim leading-relaxed">
+              Every single dollar logged with absolute clarity. Here is the double-entry accounting of my profits and the hard lessons bought as business tuition.
+            </p>
+          </div>
+
+          <!-- Interactive Ledger Controls and Visuals -->
+          <div class="max-w-4xl mx-auto space-y-6">
+            
+            <!-- Quick Account Balance Widgets -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div class="bg-brand-card border border-brand-cardBorder/80 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] uppercase font-mono tracking-widest text-[#10b981]">Total Revenue</span>
+                  <p class="text-2xl font-bold text-brand-text-bright font-display mt-1">+$350.00</p>
+                </div>
+                <div class="p-3 bg-brand-emerald/10 border border-brand-emerald/20 rounded-xl text-brand-emerald">
+                  <i data-lucide="trending-up" class="w-5 h-5"></i>
+                </div>
+              </div>
+
+              <div class="bg-brand-card border border-brand-cardBorder/80 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] uppercase font-mono tracking-widest text-brand-rose">Tuition / Scams Paid</span>
+                  <p class="text-2xl font-bold text-brand-text-bright font-display mt-1">-$345.00</p>
+                </div>
+                <div class="p-3 bg-brand-rose/10 border border-brand-rose/20 rounded-xl text-brand-rose">
+                  <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                </div>
+              </div>
+
+              <div class="bg-brand-card border border-brand-cardBorder/80 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] uppercase font-mono tracking-widest text-brand-cyan">Net Position</span>
+                  <p class="text-2xl font-bold text-brand-text-bright font-display mt-1">+$5.00</p>
+                </div>
+                <div class="p-3 bg-brand-cyan/10 border border-brand-cyan/20 rounded-xl text-brand-cyan">
+                  <i data-lucide="wallet" class="w-5 h-5"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ledger Grid Filtering & Table Lists -->
+            <div class="bg-brand-card border border-brand-cardBorder rounded-2xl p-6 space-y-6">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono font-bold text-brand-text-bright uppercase tracking-widest">Digital Ledger Records</span>
+                
+                <!-- Tab Toggles -->
+                <div class="flex items-center gap-1.5 bg-brand-bg border border-brand-cardBorder px-1 py-1 rounded-xl">
+                  <button onclick="filterLedger('all')" id="btn-ledger-all" class="px-3 py-1 bg-brand-accent text-brand-text-bright text-[10px] font-mono font-bold uppercase rounded-lg transition-all">All</button>
+                  <button onclick="filterLedger('income')" id="btn-ledger-income" class="px-3 py-1 text-brand-text-dim hover:text-brand-text-bright text-[10px] font-mono font-bold uppercase rounded-lg transition-all">Wins Only</button>
+                  <button onclick="filterLedger('tuition')" id="btn-ledger-tuition" class="px-3 py-1 text-brand-text-dim hover:text-brand-text-bright text-[10px] font-mono font-bold uppercase rounded-lg transition-all">Tuition</button>
+                </div>
+              </div>
+
+              <!-- Entries Container -->
+              <div class="space-y-3 max-h-[290px] overflow-y-auto pr-1">
+                
+                <!-- Entry 1 -->
+                <div class="ledger-item income flex items-center justify-between p-3.5 bg-brand-bg/50 border border-brand-cardBorder rounded-xl transition-all">
+                  <div class="flex items-center gap-3">
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-emerald/10 text-brand-emerald border border-brand-emerald/20">EU CONTRACT</span>
+                    <span class="text-xs font-medium text-brand-text-bright">Serbian Client (Long-term shorts)</span>
+                  </div>
+                  <span class="text-xs font-mono text-brand-emerald font-bold">+$115.00</span>
+                </div>
+
+                <!-- Entry 2 -->
+                <div class="ledger-item tuition flex items-center justify-between p-3.5 bg-brand-bg/50 border border-brand-cardBorder rounded-xl transition-all">
+                  <div class="flex items-center gap-3">
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-rose/10 text-brand-rose border border-brand-rose/20">FRAUD LOSS</span>
+                    <span class="text-xs font-medium text-brand-text-bright">Group Admin Trading Bot Scam (Devastating Fraud)</span>
+                  </div>
+                  <span class="text-xs font-mono text-brand-rose font-bold">-$55.00</span>
+                </div>
+
+                <!-- Entry 3 -->
+                <div class="ledger-item income flex items-center justify-between p-3.5 bg-brand-bg/50 border border-brand-cardBorder rounded-xl transition-all">
+                  <div class="flex items-center gap-3">
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-emerald/10 text-brand-emerald border border-brand-emerald/20">COLD OUTREACH</span>
+                    <span class="text-xs font-medium text-brand-text-bright">Russian YouTuber (Cold-pitch video cleanup contract)</span>
+                  </div>
+                  <span class="text-xs font-mono text-brand-emerald font-bold">+$42.00</span>
+                </div>
+
+                <!-- Entry 4 -->
+                <div class="ledger-item tuition flex items-center justify-between p-3.5 bg-brand-bg/50 border border-brand-cardBorder rounded-xl transition-all">
+                  <div class="flex items-center gap-3">
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-rose/10 text-brand-rose border border-brand-rose/20">GROUP FEE</span>
+                    <span class="text-xs font-medium text-brand-text-bright">Telegram "Alpha Signals" Private Entry Tuition</span>
+                  </div>
+                  <span class="text-xs font-mono text-brand-rose font-bold">-$170.00</span>
+                </div>
+
+                <!-- Entry 5 -->
+                <div class="ledger-item income flex items-center justify-between p-3.5 bg-brand-bg/50 border border-brand-cardBorder rounded-xl transition-all">
+                  <div class="flex items-center gap-3">
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-emerald/10 text-brand-emerald border border-brand-emerald/20">RECORD DEAL</span>
+                    <span class="text-xs font-medium text-brand-text-bright">YouTube High-Tier Advanced Premiere Production</span>
+                  </div>
+                  <span class="text-xs font-mono text-brand-emerald font-bold">+$125.00</span>
+                </div>
+
+                <!-- Entry 6 -->
+                <div class="ledger-item tuition flex items-center justify-between p-3.5 bg-brand-bg/50 border border-brand-cardBorder rounded-xl transition-all">
+                  <div class="flex items-center gap-3">
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-rose/10 text-brand-rose border border-brand-rose/20">CONTRACT BLOCK</span>
+                    <span class="text-xs font-medium text-brand-text-bright">Serbian Client Blocked Pay (Unpaid final milestone)</span>
+                  </div>
+                  <span class="text-xs font-mono text-brand-rose font-bold">-$40.00</span>
+                </div>
+
+                <!-- Entry 7 -->
+                <div class="ledger-item income flex items-center justify-between p-3.5 bg-brand-bg/50 border border-brand-cardBorder rounded-xl transition-all">
+                  <div class="flex items-center gap-3">
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-emerald/10 text-brand-emerald border border-brand-emerald/20">MICRO WIN</span>
+                    <span class="text-xs font-medium text-brand-text-bright">Quick-turn short deliverables &amp; revisions</span>
+                  </div>
+                  <span class="text-xs font-mono text-brand-emerald font-bold font-sans">+$68.00</span>
+                </div>
+
+                <!-- Entry 8 -->
+                <div class="ledger-item tuition flex items-center justify-between p-3.5 bg-brand-bg/50 border border-brand-cardBorder rounded-xl transition-all">
+                  <div class="flex items-center gap-3">
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-rose/10 text-brand-rose border border-brand-rose/20">BAD TRADE</span>
+                    <span class="text-xs font-medium text-brand-text-bright">Solana manual dev coin trading (Slippage/Error)</span>
+                  </div>
+                  <span class="text-xs font-mono text-brand-rose font-bold">-$60.00</span>
+                </div>
+
+                <!-- Entry 9 -->
+                <div class="ledger-item tuition flex items-center justify-between p-3.5 bg-brand-bg/50 border border-brand-cardBorder rounded-xl transition-all">
+                  <div class="flex items-center gap-3">
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-rose/10 text-brand-rose border border-brand-rose/20">REVERSAL</span>
+                    <span class="text-xs font-medium text-brand-text-bright">Chargeback/Refund dispute with unstable client</span>
+                  </div>
+                  <span class="text-xs font-mono text-brand-rose font-bold">-$20.00</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Deep Resilience Block -->
+            <div class="bg-gradient-to-r from-slate-900 to-[#100c1e] border border-brand-accent/25 p-6 rounded-2xl flex flex-col md:flex-row gap-5 items-start">
+              <div class="p-3 bg-brand-accent/15 border border-brand-accent/25 rounded-xl text-brand-accent font-bold">
+                <i data-lucide="shield-alert" class="w-6 h-6"></i>
+              </div>
+              <div class="space-y-2">
+                <span class="text-[10px] uppercase tracking-widest text-brand-accent font-display font-bold">Tuition Wisdom Realized</span>
+                <p class="text-xs sm:text-[13px] text-brand-text-bright/95 leading-relaxed font-sans italic">
+                  "Most children lose money playing games. My losses weren't paid on luxury toys—they were paid inside absolute market combat. I learned hard-token verification, contract boundaries, and developed a complete security standard against bad actors. A cheap price to pay at 16 for absolute digital security for the next 70 years."
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SECTION 4: THE ACADEMIC TRACK MATRIX -->
+        <section id="academic" class="reveal space-y-12">
+          <div class="text-center space-y-4 max-w-2xl mx-auto">
+            <h2 class="text-3xl font-extrabold tracking-tight text-brand-text-bright font-display">
+              The Academic Corner
+            </h2>
+            <p class="text-xs sm:text-sm text-brand-text-dim leading-relaxed">
+              How the investor hardware serves as my ultimate classroom engine. Map of my structured educational preparation modules.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            
+            <!-- IELTS Progress Area -->
+            <div class="bg-brand-card border border-brand-cardBorder rounded-2xl p-6 space-y-4 text-left">
+              <div class="flex items-center justify-between">
+                <h3 class="text-base font-bold text-brand-text-bright font-display flex items-center gap-2">
+                  <i data-lucide="globe" class="w-5 h-5 text-brand-cyan"></i>
+                  IELTS High-Stakes Prep Path
+                </h3>
+                <span class="text-[9px] font-mono bg-brand-cyan/10 border border-brand-cyan/20 px-2 py-0.5 rounded text-brand-cyan font-bold uppercase tracking-widest">Targeting 7.5+</span>
+              </div>
+              <p class="text-xs text-brand-text-dim leading-relaxed">
+                Utilizing the high-end platform to coordinate complex linguistic frameworks, execute automated vocabulary training, and host heavy translation modules. Successfully developed native fluency required for global freelancing markets.
+              </p>
+              <div class="space-y-3 pt-2">
+                <div>
+                  <div class="flex justify-between text-[11px] font-mono mb-1">
+                    <span>Fluency &amp; Communication</span>
+                    <span class="text-brand-cyan font-bold">Fluent (C1)</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden">
+                    <div class="h-full bg-brand-cyan rounded-full" style="width: 88%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-[11px] font-mono mb-1">
+                    <span>Written &amp; Editorial Flow</span>
+                    <span class="text-brand-cyan font-bold">Standardized</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden">
+                    <div class="h-full bg-brand-cyan rounded-full" style="width: 80%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SAT Path -->
+            <div class="bg-brand-card border border-brand-cardBorder rounded-2xl p-6 space-y-4 text-left">
+              <div class="flex items-center justify-between">
+                <h3 class="text-base font-bold text-brand-text-bright font-display flex items-center gap-2">
+                  <i data-lucide="book-open" class="w-5 h-5 text-brand-emerald"></i>
+                  SAT Preparation Curriculum
+                </h3>
+                <span class="text-[9px] font-mono bg-brand-emerald/10 border border-brand-emerald/20 px-2 py-0.5 rounded text-brand-emerald font-bold uppercase tracking-widest">In Progress</span>
+              </div>
+              <p class="text-xs text-brand-text-dim leading-relaxed">
+                Driving continuous mathematical optimization problems, writing complex algorithms, and holding extensive vocabulary and reading comprehensive workflows directly inside local development instances.
+              </p>
+              <div class="space-y-3 pt-2">
+                <div>
+                  <div class="flex justify-between text-[11px] font-mono mb-1">
+                    <span>SAT Mathematics Index</span>
+                    <span class="text-brand-emerald font-bold">Active Prep</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden">
+                    <div class="h-full bg-brand-emerald rounded-full" style="width: 78%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-[11px] font-mono mb-1">
+                    <span>SAT Writing &amp; Reading Syntax</span>
+                    <span class="text-brand-emerald">Active Prep</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden">
+                    <div class="h-full bg-brand-emerald rounded-full" style="width: 72%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SECTION 5: THE AI LAB INTERACTIVE TERMINAL -->
+        <section id="terminal" class="reveal space-y-8">
+          <div class="text-center space-y-4 max-w-2xl mx-auto">
+            <h2 class="text-3xl font-extrabold tracking-tight text-brand-text-bright font-display">
+              The AI Systems Lab
+            </h2>
+            <p class="text-xs sm:text-sm text-brand-text-dim leading-relaxed">
+              Transitioning from manual graphic editors to building sovereign AI tools and automated agent networks.
+            </p>
+          </div>
+
+          <!-- Interactive Terminal Widget -->
+          <div class="max-w-4xl mx-auto rounded-2xl border border-brand-cardBorder bg-[#040407] overflow-hidden flex flex-col shadow-2xl">
+            <!-- Terminal Header -->
+            <div class="bg-[#0b0c16]/95 px-4 py-3 border-b border-brand-cardBorder flex items-center justify-between">
+              <!-- Dots -->
+              <div class="flex items-center gap-1.5">
+                <div class="w-2.5 h-2.5 rounded-full bg-brand-rose"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-brand-emerald"></div>
+                <span class="text-[10px] font-mono ml-2 text-slate-500">turan@core-engine:~/projects/ai</span>
+              </div>
+
+              <!-- Tabs -->
+              <div class="flex items-center gap-1.5">
+                <button onclick="switchTerminalTab('ai-agent')" id="tab-ai-agent" class="px-2.5 py-1 text-[9.5px] font-mono font-bold uppercase rounded bg-brand-accent/20 border border-brand-accent/40 text-brand-text-bright">🤖 Agent System</button>
+                <button onclick="switchTerminalTab('react-core')" id="tab-react-core" class="px-2.5 py-1 text-[9.5px] font-mono font-bold uppercase rounded text-slate-500 hover:text-slate-350">⚡ Frontend</button>
+                <button onclick="switchTerminalTab('browser-bot')" id="tab-browser-bot" class="px-2.5 py-1 text-[9.5px] font-mono font-bold uppercase rounded text-slate-500 hover:text-slate-350">🐍 Python Bot</button>
+              </div>
+            </div>
+
+            <!-- Terminal Output Area -->
+            <div class="p-6 font-mono text-left text-xs text-slate-300 min-h-[280px] space-y-2 select-text overflow-y-auto">
+              <!-- AI Agent Console Content -->
+              <div id="terminal-content-ai-agent" class="terminal-view space-y-2">
+                <span class="text-slate-600 font-bold">[SYSTEM SECURE INITIALIZING]</span><br>
+                <span>🚀 Injected process.env.GEMINI_API_KEY into server-side production... <span class="text-brand-emerald font-bold">OK (200 OK)</span></span><br>
+                <span>💡 Spinning up modular generative node targeting creative prompts...</span><br>
+                <span class="text-brand-cyan">► Target prompt context locked: 'Automate cinematic Shorts sequencing structures'</span><br>
+                <span>⚙️ Tool Engine initialized successfully (Modules: Web_Search, File_System_IO)</span><br>
+                <span class="text-brand-accent text-[11px] font-bold">↳ [Agent Response] "System compiled successfully. Deployed asset pipelines in 854ms."</span>
+              </div>
+
+              <!-- React Frontend Console Content -->
+              <div id="terminal-content-react-core" class="terminal-view hidden space-y-2">
+                <span class="text-slate-600 font-bold">[VITE COMPILER LOADED]</span><br>
+                <span>✓ Loaded React 19 Core Engine Framework</span><br>
+                <span>✓ Verified Tailwind CSS Utility classes (Applied: Space Grotesk Displays, Obsidian Layouts)</span><br>
+                <span>⚡ Building static optimized build assets for GitHub Pages deployment...</span><br>
+                <span class="text-brand-cyan">✓ Built dist/index.html (71.2kB | GZIP: 17.5kB) with Base configuration: './'</span><br>
+                <span class="text-brand-emerald font-bold">✓ Deployment verified on github.io pipeline! Zero relative path failures.</span>
+              </div>
+
+              <!-- Python Automation Console Content -->
+              <div id="terminal-content-browser-bot" class="terminal-view hidden space-y-2">
+                <span class="text-slate-600 font-bold">[PYTHON COMPACT TASK ENVIRONMENT]</span><br>
+                <span>$ python3 automation/agent_workflow.py</span><br>
+                <span class="text-brand-cyan">► Launching fully headless Playwright browser thread...</span><br>
+                <span>✓ Emulating organic viewport context inputs ... Ok</span><br>
+                <span>⚡ Logging in securely; validating authentication token hashes... Target verification checked!</span><br>
+                <span class="text-brand-emerald">✓ Executed complete target analysis routing workflow without any security flags. Done.</span>
+              </div>
+            </div>
+            
+            <!-- Compile Command Trigger -->
+            <div class="bg-brand-card/30 px-6 py-3 border-t border-brand-cardBorder flex items-center justify-between">
+              <span class="text-[9px] font-mono text-slate-500">Live operational execution verification</span>
+              <button onclick="simulateCompile()" id="compile-btn" class="px-3.5 py-1.5 bg-brand-emerald/15 hover:bg-brand-emerald/25 border border-brand-emerald/35 rounded-xl text-[10.5px] font-mono font-bold text-brand-emerald flex items-center gap-1.5 transition-all">
+                <i data-lucide="play-circle" class="w-3.5 h-3.5"></i> Run Compilation
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 6: THE CLOSING (LETTER TO THE INVESTOR) -->
+        <section id="closing" class="reveal relative max-w-4xl mx-auto pb-12">
+          
+          <div class="bg-brand-card border border-brand-accent/25 rounded-3xl p-8 sm:p-12 space-y-8 relative overflow-hidden shadow-2xl">
+            <div class="absolute inset-0 bg-radial-flare pointer-events-none opacity-25"></div>
+
+            <div class="flex items-center justify-between border-b border-brand-cardBorder pb-6">
+              <div class="space-y-1">
+                <span class="text-[9px] font-mono bg-brand-accent/10 border border-brand-accent/25 px-2 py-0.5 rounded text-brand-accent font-bold uppercase tracking-widest">TRANSPARENCY RECORD</span>
+                <h3 class="text-xl font-bold font-display text-brand-text-bright">A Final Note to My Uncle</h3>
+              </div>
+              <div class="text-right">
+                <span class="text-[10px] font-mono text-slate-500 uppercase">Document Ref</span>
+                <p class="text-xs font-mono text-brand-cyan font-bold leading-none mt-1">TM-2026-X16</p>
+              </div>
+            </div>
+
+            <div class="text-sm text-brand-text-bright/90 leading-relaxed space-y-6 font-sans text-left">
+              <p>
+                Dear Uncle,
+              </p>
+              <p>
+                A year ago, I knelt down inside the initial "presentation.pdf" pitch and promised you that the clipping business would retire you within four months. I said that out of absolute, raw emotional excitement. To a young enthusiast, the market looks like something you can conquer in a week. I had no concept of technical barriers, proxy constraints, or the operational discipline required to run automated business units.
+              </p>
+              <p>
+                When those technical walls hit us in my region, I could have closed the computer and admitted defeat. But instead, <span class="text-brand-accent font-medium">I pivoted entirely</span>. I treated that high-performance machine not as an entertainment box, but as my master-class laboratory. 
+              </p>
+              <p>
+                I abandoned basic CapCut apps, spent two intense months mapping raw video structures inside Adobe Premiere and After Effects, edited fully for free to master real-world client acquisition mechanics, and eventually brought home $350 in pure earned revenue.
+              </p>
+              <p>
+                Yes, I lost $345 along the way to scams, learning Solana gas fee structures, and falling for bad-actor Telegram trading schemes. Many 16-year-olds lose money playing games; my losses were paid directly inside early market combat. Every dollar was paid as literal business tuition, giving me an absolute, ironclad verification standard I will carry for the next seventy years.
+              </p>
+              <p>
+                Today, I am integrating the full power of my graphic design logic with deep automation programming. I am building automated AI agents, developing robust web experiences, and driving IELTS / SAT mathematics preparation, all powered by this single primary engine you trusted me with. Target success is not a question of 'if' anymore—it is a strict equation of execution times.
+              </p>
+              <p>
+                Thank you for the operational trust, the technology foundation, and for believing in me as an entrepreneur when I was just beginning to find my path.
+              </p>
+              <div class="pt-6 border-t border-brand-cardBorder flex items-center justify-between">
+                <div>
+                  <p class="text-xs font-mono text-slate-500">RESPECTFULLY SUBMITTED,</p>
+                  <p class="text-base font-bold text-brand-text-bright font-display mt-1">Turan Mammadli</p>
+                  <p class="text-[9px] font-mono text-brand-cyan uppercase tracking-widest mt-0.5">Software Developer &amp; Visual Designer</p>
+                </div>
+                <!-- Interactive Signature Badge -->
+                <div class="px-4 py-2 bg-gradient-to-r from-brand-accent/5 to-brand-cyan/5 border border-brand-cardBorder rounded-xl flex items-center gap-2">
+                  <div class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></div>
+                  <span class="text-[10px] font-mono text-brand-text-bright tracking-wider uppercase font-bold">Verification Validated</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+      <!-- PREMIUM BRAND FOOTER -->
+      <footer class="mt-16 border-t border-brand-cardBorder/85 bg-brand-card/40 py-8 text-center text-[10px] font-mono tracking-widest text-[#64748b]">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <span class="uppercase">© <span id="year">2026</span> Turan Mammadli. ALL TRANSACTIONAL LEDGERS AUDITED WITH ABSOLUTE CONVICTION.</span>
+          <span class="text-brand-cyan uppercase flex items-center gap-1">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-brand-cyan"></i> SECURED TRANSPARENCY PIPELINE
+          </span>
+        </div>
+      </footer>
+
+    </div>
+
+    <!-- Interactive JS logic served cleanly in a single script block -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      // Initialize lucide icons
+      lucide.createIcons();
+
+      // Filter ledger entries interactively
+      function filterLedger(type) {
+        const items = document.querySelectorAll('.ledger-item');
+        const buttons = {
+          all: document.getElementById('btn-ledger-all'),
+          income: document.getElementById('btn-ledger-income'),
+          tuition: document.getElementById('btn-ledger-tuition')
+        };
+
+        // Reset all button styles
+        Object.keys(buttons).forEach(key => {
+          buttons[key].className = "px-3 py-1 text-brand-text-dim hover:text-brand-text-bright text-[10px] font-mono font-bold uppercase rounded-lg transition-all";
+        });
+
+        // Set active button style
+        buttons[type].className = "px-3 py-1 bg-brand-accent text-brand-text-bright text-[10px] font-mono font-bold uppercase rounded-lg transition-all";
+
+        // Show/hide based on filtration class
+        items.forEach(item => {
+          if (type === 'all') {
+            item.classList.remove('hidden');
+          } else if (type === 'income') {
+            if (item.classList.contains('income')) {
+              item.classList.remove('hidden');
+            } else {
+              item.classList.add('hidden');
+            }
+          } else if (type === 'tuition') {
+            if (item.classList.contains('tuition')) {
+              item.classList.remove('hidden');
+            } else {
+              item.classList.add('hidden');
+            }
+          }
+        });
+      }
+
+      // Switch active terminal simulation core tabs
+      function switchTerminalTab(tabId) {
+        const tabs = {
+          'ai-agent': document.getElementById('tab-ai-agent'),
+          'react-core': document.getElementById('tab-react-core'),
+          'browser-bot': document.getElementById('tab-browser-bot')
+        };
+        const contentBlocks = {
+          'ai-agent': document.getElementById('terminal-content-ai-agent'),
+          'react-core': document.getElementById('terminal-content-react-core'),
+          'browser-bot': document.getElementById('terminal-content-browser-bot')
+        };
+
+        // Standardize all tab styling inactive
+        Object.keys(tabs).forEach(key => {
+          tabs[key].className = "px-2.5 py-1 text-[9.5px] font-mono font-bold uppercase rounded text-slate-500 hover:text-slate-350";
+        });
+        // Activate selected tab style
+        tabs[tabId].className = "px-2.5 py-1 text-[9.5px] font-mono font-bold uppercase rounded bg-brand-accent/20 border border-brand-accent/40 text-brand-text-bright";
+
+        // Show/hide respective visual data
+        Object.keys(contentBlocks).forEach(key => {
+          contentBlocks[key].classList.add('hidden');
+        });
+        contentBlocks[tabId].classList.remove('hidden');
+      }
+
+      // Live simulate client compilation trigger
+      function simulateCompile() {
+        const btn = document.getElementById('compile-btn');
+        const activeTab = document.querySelector('.terminal-view:not(.hidden)');
+        
+        // Disable button click temporarily to block spam
+        btn.disabled = true;
+        btn.innerHTML = `<span class="animate-pulse flex items-center gap-1.5"><i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> Compiling Core...</span>`;
+        lucide.createIcons();
+
+        // Inject simulated process block instantly into current block
+        const span = document.createElement('span');
+        span.className = "text-yellow-400 block mt-2 animate-pulse";
+        span.innerText = `► Executing sandbox compilation sequence... Checksum OK. Deploying logs...`;
+        activeTab.appendChild(span);
+
+        setTimeout(() => {
+          span.className = "text-brand-emerald block mt-1";
+          span.innerText = `✓ Sandbox output clean. Completed active task in 410ms (100% test units pass).`;
+          
+          btn.disabled = false;
+          btn.innerHTML = `<i data-lucide="play-circle" class="w-3.5 h-3.5"></i> Run Compilation`;
+          lucide.createIcons();
+        }, 1200);
+      }
+
+      // Custom smooth reveal on scroll logic (Intersection Observer)
+      function triggerReveal() {
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries, self) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+              self.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: "0px 0px -40px 0px"
+        });
+
+        reveals.forEach(reveal => {
+          observer.observe(reveal);
+        });
+      }
+
+      // Page mount orchestration
+      document.addEventListener("DOMContentLoaded", () => {
+        // Dynamic footer year updating
+        const yr = new Date().getFullYear();
+        if (yr >= 2026) document.getElementById('year').innerText = yr;
+
+        // Custom bottom-to-top fluid scroll reveal introductory orchestration
+        document.body.style.overflowY = "hidden";
+
+        setTimeout(() => {
+          const docHeight = document.documentElement.scrollHeight;
+          const winHeight = window.innerHeight;
+          const maxScroll = Math.max(0, docHeight - winHeight);
+
+          // Leap instantly to page footer bottom
+          window.scrollTo(0, maxScroll);
+
+          setTimeout(() => {
+            // Fade loader screen
+            const loader = document.getElementById('page-loader');
+            loader.classList.add('opacity-0');
+            setTimeout(() => loader.classList.add('hidden'), 1000);
+
+            // Execute programmatic custom scroll-up transition
+            const scrollDuration = 2200; // Fluid cinematic duration
+            const startTime = performance.now();
+            const mainContent = document.getElementById('main-content');
+
+            function performScrollAnimate(now) {
+              const elapsed = now - startTime;
+              let ratio = elapsed / scrollDuration;
+              if (ratio > 1) ratio = 1;
+
+              // Ultra-precise quartic ease out formula
+              const easeOutQuart = 1 - Math.pow(1 - ratio, 4);
+              const targetPos = maxScroll * (1 - easeOutQuart);
+              window.scrollTo(0, targetPos);
+
+              // Cinematic motion blur styling adjustments dynamically
+              const speedIndicator = (1 - ratio) * 12;
+              if (mainContent) {
+                const blurAmount = Math.max(0, ratio === 1 ? 0 : speedIndicator);
+                mainContent.style.filter = `blur(${blurAmount}px)`;
+                mainContent.style.transform = `translateY(${ratio === 1 ? 0 : (speedIndicator * 1.5)}px)`;
+              }
+
+              if (ratio < 1) {
+                requestAnimationFrame(performScrollAnimate);
+              } else {
+                // Ensure browser fully settled at top (0)
+                window.scrollTo(0, 0);
+                document.body.style.overflowY = "auto";
+                if (mainContent) {
+                  mainContent.style.filter = "none";
+                  mainContent.style.transform = "none";
+                }
+                // Trigger dynamic Intersection Observer scroll markers
+                triggerReveal();
+              }
+            }
+
+            requestAnimationFrame(performScrollAnimate);
+
+          }, 800);
+
+        }, 150);
+      });
+
+      // UX scroll progress tracker
+      window.addEventListener("scroll", () => {
+        const winScroll = window.scrollY;
+        const height = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById("ux-scroll-bar").style.width = scrolled + "%";
+      });
+    </script>
   </body>
 </html>
